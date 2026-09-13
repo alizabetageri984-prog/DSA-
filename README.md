@@ -2,7 +2,7 @@
 
 ## 📊 Progress
 
-**Total Questions Solved: 3**
+**Total Questions Solved: 20**
 
 ### Problems
 
