@@ -295,3 +295,40 @@ height = [4, 2, 0, 3, 2, 5]
 print(Solution().trap(height))
 
 
+#You are given two strings word1 and word2. Merge the strings by adding letters in alternating order, starting with word1. If a string is longer than the other, append the additional letters onto the end of the merged string.
+
+class Solution(object):
+    def mergeAlternately(self, word1, word2):
+        result = ""
+        i = 0
+
+        while i < len(word1) or i < len(word2):
+
+            if i < len(word1):
+                result += word1[i]
+
+            if i < len(word2):
+                result += word2[i]
+
+            i += 1
+
+        return result
+
+
+print(Solution().mergeAlternately("abc", "pqr"))
+
+#Given an integer array nums of size n, return the minimum number of moves required to make all array elements equal.
+
+#In one move, you can increment or decrement an element of the array by 1
+class Solution(object):
+    def minMoves2(self, nums):
+        nums.sort()
+
+        median = nums[len(nums) // 2]
+
+        moves = 0
+
+        for num in nums:
+            moves += abs(num - median)
+
+        return moves
