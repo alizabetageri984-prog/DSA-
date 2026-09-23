@@ -229,6 +229,11 @@ n = 3
 solution = Solution()
 
 print(solution.merge(nums1, m, nums2, n))
+#"The time complexity is O(m + n), because we traverse the elements of both arrays at most once. The space complexity is O(1), because we merge in-place without using extra space."
+
+
+
+
 #Given a sorted integer array nums, remove duplicates in-place such that each unique element appears only once. Return the count of unique elements k. The first k elements of nums must hold the unique values.
 class Solution(object):
     def removeDuplicates(self, nums):
@@ -332,3 +337,56 @@ class Solution(object):
             moves += abs(num - median)
 
         return moves
+
+    #You are given an array people where people[i] is the weight of the ith person, and an infinite number of boats where each boat can carry a maximum weight of limit. Each boat carries at most two people at the same time, provided the sum of the weight of those people is at most limit.
+class Solution(object):
+    def numRescueBoats(self, people, limit):
+        people.sort()
+        
+        left_pointer = 0
+        right_pointer = len(people)-1
+
+        Boats = 0
+
+        while left_pointer <= right_pointer:
+
+            if people[left_pointer] + people [right_pointer] <= limit:
+                left_pointer += 1 # moves if are in limit 
+
+            right_pointer -= 1 # moves if they are not in limit 
+
+            Boats += 1
+        return Boats
+print(Solution().numRescueBoats([3,2,2,1],3))
+#You are given an integer array nums and an integer k.
+
+#In one operation, you can pick two numbers from the array whose sum equals k and remove them from the array.
+
+#Return the maximum number of operations you can perform on the array.
+class Solution(object):
+    def maxOperations(self, nums, k):
+        nums.sort()
+
+        left_pointer = 0
+        right_pointer = len(nums) - 1
+
+        maximum = 0
+
+        while left_pointer < right_pointer:
+            total = nums[left_pointer] + nums[right_pointer] 
+            if total == k:
+                maximum += 1
+
+                left_pointer += 1
+                right_pointer -=1
+
+            elif total < k:
+                left_pointer += 1
+
+            else:
+                right_pointer -= 1
+
+        return maximum
+print(Solution().maxOperations([1,2,3,4],5))
+
+            
