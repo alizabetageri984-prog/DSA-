@@ -389,4 +389,36 @@ class Solution(object):
         return maximum
 print(Solution().maxOperations([1,2,3,4],5))
 
+#Given a string s, return the longest palindromic substring in s.
+class Solution(object):
+    def longestPalindrome(self, s):
+        longest = ""
+
+        for i in range(len(s)):
+            left = i
+            right = i
+
+            # Odd length
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+
+                if right - left + 1 > len(longest):
+                    longest = s[left:right + 1]
+
+                left -= 1
+                right += 1
+
+            # Even length
+            left = i
+            right = i + 1
+
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+
+                if right - left + 1 > len(longest):
+                    longest = s[left:right + 1]
+
+                left -= 1
+                right += 1
+
+        return longest
+print(Solution().longestPalindrome("babad"))
             
