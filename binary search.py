@@ -1,6 +1,5 @@
 #Question 1 (basic): Given numbers = [1, 3, 5, 7, 9, 11, 13], find the index of target = 13 using binary search. Do a quick trace: what's left, right, middle at each step?
-from doctest import Example
-from turtle import right
+
 
 
 def binary_search(numbers, target):
@@ -138,3 +137,50 @@ class Solution(object):
             else:
                 left_pointer = middle_pointer + 1
         return right_pointer
+#Given an array of integers nums sorted in non-decreasing order, find the starting and ending position of a given target value.
+
+#If target is not found in the array, return [-1, -1].
+
+#You must write an algorithm with O(log n) runtime complexity.
+class Solution(object):
+    def searchRange(self, nums, target):
+        left_pointer=0          #Start searching from index 0.
+        right_pointer = len(nums) - 1# searching till  last index 
+        first = -1    # - 1 is invalid index best way to tell that we noto found
+
+        while left_pointer <= right_pointer:#"As long as left has not crossed right, keep searching.
+            middle_pointer = (left_pointer + right_pointer) // 2  #This finds the middle position.
+            if nums[middle_pointer] == target: #"Is the number at the middle position equal to our target?"
+                first = middle_pointer
+                right_pointer = middle_pointer - 1
+
+            elif nums[middle_pointer] < target:
+                left_pointer = middle_pointer + 1
+
+            else:
+                right_pointer = middle_pointer - 1
+        # Find the last position
+        left_pointer = 0
+        right_pointer = len(nums) -1
+        last = -1
+
+        while left_pointer <= right_pointer:
+            middle_pointer = (left_pointer + right_pointer) // 2
+
+            if nums[middle_pointer] == target:
+                last = middle_pointer
+                left_pointer = middle_pointer + 1
+
+            elif nums[middle_pointer] < target:
+                left_pointer = middle_pointer + 1
+                
+            else:
+                right_pointer = middle_pointer - 1
+        return[first , last]
+
+
+print(Solution().searchRange([5, 7, 7, 8, 8, 10], 8))
+
+
+
+
