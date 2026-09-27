@@ -180,6 +180,43 @@ class Solution(object):
 
 
 print(Solution().searchRange([5, 7, 7, 8, 8, 10], 8))
+#There is an integer array nums sorted in ascending order (with distinct values).
+
+##Prior to being passed to your function, nums is possibly left rotated at an unknown index k (1 <= k < nums.length) such that the resulting array is [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]] (0-indexed). For example, [0,1,2,4,5,6,7] might be left rotated by 3 indices and become [4,5,6,7,0,1,2].
+
+#Given the array nums after the possible rotation and an integer target, return the index of target if it is in nums, or -1 if it is not in nums.
+class Solution(object):
+    def search(self, nums, target):
+        left_pointer = 0
+        right_pointer = len(nums) - 1
+
+        while left_pointer <= right_pointer:
+            middle_pointer = (left_pointer + right_pointer) // 2
+
+            if nums[middle_pointer] == target:
+                return middle_pointer
+
+                #check weather the left half after roatation is sorted?
+            if nums[left_pointer] <= nums[middle_pointer]:
+                #check wheater to the target is right or left 
+                #to check left 
+
+                if nums[left_pointer] <= target < nums[middle_pointer]:
+                    right_pointer = middle_pointer - 1
+
+                else:
+                    left_pointer = middle_pointer + 1
+
+            else: # this runs when if condition that the left part is sorted is not true 
+                    # this checks that is target is in right sorted part and decide to move left or right 
+                if nums[middle_pointer] < target <= nums[right_pointer]:
+                    left_pointer = middle_pointer + 1
+                else:
+                    right_pointer = middle_pointer - 1
+        return - 1
+print(Solution().search([4,5,6,7,0,1,2],0))
+
+
 
 
 
