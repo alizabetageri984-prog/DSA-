@@ -216,6 +216,44 @@ class Solution(object):
         return - 1
 print(Solution().search([4,5,6,7,0,1,2],0))
 
+#There is an integer array nums sorted in non-decreasing order (not necessarily with distinct values).
+
+#Before being passed to your function, nums is rotated at an unknown pivot index k (0 <= k < nums.length) such that the resulting array is [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]] (0-indexed). For example, [0,1,2,4,4,4,5,6,6,7] might be rotated at pivot index 5 and become [4,5,6,6,7,0,1,2,4,4].
+
+#Given the array nums after the rotation and an integer target, return true if target is in nums, or false if it is not in nums.
+
+#You must decrease the overall operation steps as much as possible.
+class Solution(object):
+    def search(self, nums, target):
+        left_pointer = 0
+        right_pointer = len (nums) -1
+
+        while left_pointer <= right_pointer:
+            middle_pointer = (left_pointer + right_pointer) // 2
+
+            if nums[middle_pointer] == target:
+                return True
+
+            if nums[left_pointer] == nums[middle_pointer] == nums[right_pointer]:
+                left_pointer += 1
+                right_pointer -= 1
+                continue
+            if nums[left_pointer] <= nums[middle_pointer]:
+
+                if nums[left_pointer] <= target < nums[middle_pointer]:
+                    right_pointer -= 1
+
+                else:
+                    left_pointer += 1
+            else:
+                if nums[middle_pointer] < target <= nums[right_pointer]:
+                    left_pointer += 1
+                else:
+                    right_pointer -= 1
+        return False
+print(Solution().search([2,5,6,0,0,1,2],0))
+
+
 
 
 
