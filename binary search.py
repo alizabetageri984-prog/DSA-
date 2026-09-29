@@ -277,6 +277,31 @@ class Solution(object):
 print(Solution().findMin([1,3,5]))
 print(Solution().findMin([2,2,2,0,1]))
 
+#Koko loves to eat bananas. There are n piles of bananas, the ith pile has piles[i] bananas. The guards have gone and will come back in h hours.
 
+#Koko can decide her bananas-per-hour eating speed of k. Each hour, she chooses some pile of bananas and eats k bananas from that pile. If the pile has less than k bananas, she eats all of them instead and will not eat any more bananas during this hour.
+
+#Koko likes to eat slowly but still wants to finish eating all the bananas before the guards return.
+
+#Return the minimum integer k such that she can eat all the bananas within h hours.
+class Solution(object):
+    def minEatingSpeed(self, piles, h):
+        left = 1 #The slowest possible speed is 1 banana per hour.
+        right = max(piles)# max(piles) finds the biggest pile.
+
+        while left <= right:#"Keep searching while there are still possible speeds to check."
+            k = (left + right) //2#"Can Koko finish all the bananas if she eats 6 bananas per hour?"
+
+            hours = 0
+
+            for pile in piles: #This goes through each pile one by one.
+                hours += (pile + k - 1) // k #How many hours are needed to finish the current pile
+
+            if hours <= h: #"Can Koko finish within the available 8 hours?"
+                right = k -1#Since k = 6 works, maybe Koko can eat even slower
+            else:
+                left = k + 1
+        return left #At the end of Binary Search, left becomes the smallest speed that works.
+print(Solution().minEatingSpeed([3,6,7,11], 8))
 
 
