@@ -254,7 +254,28 @@ class Solution(object):
 print(Solution().search([2,5,6,0,0,1,2],0))
 
 
+#Suppose an array of length n sorted in ascending order is rotated between 1 and n times. For example, the array nums = [0,1,4,4,5,6,7] might become:
+#Given the sorted rotated array nums that may contain duplicates, return the minimum element of this array.
+class Solution(object):
+    def findMin(self, nums):
 
+        left_pointer = 0
+        right_pointer = len(nums)-1
+
+        while left_pointer < right_pointer:#"Keep repeating the loop as long as left and right are pointing to different positions."
+            middle_pointer = (left_pointer+right_pointer)//2
+
+            if nums[middle_pointer] > nums[right_pointer]:#"The middle value is bigger than the right value, so the minimum is on the right side of mid. Throw away the left side, including mid."
+                left_pointer = middle_pointer + 1
+
+            elif nums[middle_pointer] < nums[right_pointer]:#"The minimum is at mid or somewhere to its left, so move right to mid but keep mid."
+                right_pointer = middle_pointer
+
+            else:
+                right_pointer = right_pointer - 1 #"The middle and right values are equal, so the right value gives us no useful information. Remove that one duplicate and continue searching."
+        return nums[left_pointer]
+print(Solution().findMin([1,3,5]))
+print(Solution().findMin([2,2,2,0,1]))
 
 
 
