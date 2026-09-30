@@ -303,5 +303,34 @@ class Solution(object):
                 left = k + 1
         return left #At the end of Binary Search, left becomes the smallest speed that works.
 print(Solution().minEatingSpeed([3,6,7,11], 8))
+#A peak element is an element that is strictly greater than its neighbors.
 
+#Given a 0-indexed integer array nums, find a peak element, and return its index. If the array contains multiple peaks, return the index to any of the peaks.
 
+#You may imagine that nums[-1] = nums[n] = -∞. In other words, an element is always considered to be strictly greater than a neighbor that is outside the array.
+
+#You must write an algorithm that runs in O(log n) time.
+
+class Solution(object):
+    def findPeakElement(self, nums):
+        
+        left = 0
+        right = len(nums) - 1
+
+        while left < right:
+            
+            mid = (left + right) // 2
+
+            if nums[mid] < nums[mid + 1]:
+                # We are going uphill,
+                # so a peak must be on the right
+                left = mid + 1
+            
+            else:
+                # We are going downhill,
+                # so a peak is on the left or at mid
+                right = mid
+
+        return left
+print(Solution().findPeakElement([1,2,3,1]))
+print(Solution().findPeakElement([1,2,1,3,5,6,4]))
