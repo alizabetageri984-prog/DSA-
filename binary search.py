@@ -2,6 +2,9 @@
 
 
 
+from ast import Return
+
+
 def binary_search(numbers, target):
     left_pointer = 0 
     right_pointer = len(numbers) - 1
@@ -334,3 +337,32 @@ class Solution(object):
         return left
 print(Solution().findPeakElement([1,2,3,1]))
 print(Solution().findPeakElement([1,2,1,3,5,6,4]))
+#You are given an integer mountain array arr of length n where the values increase to a peak element and then decrease.
+
+#Return the index of the peak element.
+class Solution(object):
+
+    def peakIndexInMountainArray(self, arr):
+
+        left = 0
+        right = len(arr) - 1
+
+        while left < right:
+
+            mid = (left + right) // 2
+
+            if arr[mid] < arr[mid + 1]:
+                # We are going uphill
+                # Peak is on the right
+                left = mid + 1
+
+            else:
+                # We are going downhill
+                # Peak is at mid or on the left
+                right = mid
+
+        return left
+print(Solution().peakIndexInMountainArray([0,1,0]))
+print(Solution().peakIndexInMountainArray([0,10,5,2]))
+
+
