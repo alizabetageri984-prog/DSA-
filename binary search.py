@@ -427,7 +427,7 @@ class Solution(object):
 
             #step 3 : search in the right half
             left = peak + 1
-            right = mountainArr.lenght() - 1
+            right = mountainArr.length() - 1
 
             while left <= right:
                 mid = (left +right) // 2
@@ -463,4 +463,30 @@ target = 3
 answer = Solution().findInMountainArray(target, mountainArr)
 
 print("Answer:", answer)
+#A conveyor belt has packages that must be shipped from one port to another within days days.
 
+#The ith package on the conveyor belt has a weight of weights[i]. Each day, we load the ship with packages on the conveyor belt (in the order given by weights). We may not load more weight than the maximum weight capacity of the ship.
+
+#Return the least weight capacity of the ship that will result in all the packages on the conveyor belt being shipped within days days.
+class Solution(object):
+    def shipWithinDays(self, weights, days):
+        left = max(weights) # the minimum capacity of the ship must be at least the weight of the heaviest package
+        right = sum(weights)# the maximun capacity of the ship can be the sum of all weights if we ship everything in one day
+
+        while left < right:
+            mid = (left +right) // 2
+            current_weight = 0
+            days_used = 1
+
+            for weight in weights:
+                if current_weight + weight > mid:# if adding the current package exceeds the capacity of the ship , we need to use another day to ship the current package
+                    days_used += 1
+                    current_weight = 0
+                current_weight += weight
+
+            if days_used <= days:
+                right = mid
+            else:
+                left = mid + 1
+        return left
+print(Solution().shipWithinDays([1, 2 ,3, 4, 5, 6, 7, 8, 9, 10], 5))
