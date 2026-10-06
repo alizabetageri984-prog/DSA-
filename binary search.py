@@ -490,3 +490,34 @@ class Solution(object):
                 left = mid + 1
         return left
 print(Solution().shipWithinDays([1, 2 ,3, 4, 5, 6, 7, 8, 9, 10], 5))
+#Given an integer array nums and an integer k, split nums into k non-empty subarrays such that the largest sum of any subarray is minimized.
+
+#Return the minimized largest sum of the split.
+
+#A subarray is a contiguous part of the array.
+class Solution:
+    def splitArray(self, nums, k):
+        left = max(nums)
+        right = sum(nums)
+
+        while left < right:
+            mid = (left + right) // 2
+
+            parts = 1
+            current_sum = 0
+
+            for num in nums:
+                if current_sum + num > mid:
+                    parts += 1
+                    current_sum = num
+                else:
+                    current_sum += num
+
+            if parts <= k:
+                right = mid
+            else:
+                left = mid + 1
+
+        return left
+
+print(Solution().splitArray([7,2,5,10,8], 2))
